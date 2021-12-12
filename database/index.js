@@ -17,7 +17,7 @@ sequelize.sync({
   force: false
 })
 
-const Forum = sequelize.define('forums', {
+const Forum = sequelize.define('Forum', {
   user_id: {
     type: DataTypes.INTEGER,
     allowNull: false
@@ -102,11 +102,67 @@ const Recipe = sequelize.define('recipes', {
   updatedAt: false
 });
 
+const Workout = sequelize.define('Workout', {
+  user_id_created: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  name: {
+    type: DataTypes.STRING
+  },
+  type: {
+    type: DataTypes.STRING
+  },
+  popularity_score: {
+    type: DataTypes.INTEGER
+  },
+  likes: {
+    type: DataTypes.INTEGER
+  }
+}, {
+  tableName: 'workouts',
+  timestamp: false,
+  createdAt: false,
+  updatedAt: false
+});
+
+const User = sequelize.define('users', {
+  google_id: {
+    type: DataTypes.STRING,
+  },
+  is_coach: {
+    type: DataTypes.BOOLEAN,
+  },
+  coach_id: {
+    type: DataTypes.INTEGER,
+  },
+  name: {
+    type: DataTypes.STRING,
+  },
+  profile_photo_url: {
+    type: DataTypes.STRING,
+  },
+  weight: {
+    type: DataTypes.INTEGER,
+  },
+  age: {
+    type: DataTypes.INTEGER,
+  }
+}, {
+  timestamp: false,
+  createdAt: false,
+  updatedAt: false
+})
+
 Forum.belongsTo(Recipe, { foreignKey: 'recipe_id' })
+Forum.belongsTo(Workout, { foreignKey: 'workout_id' })
+Forum.belongsTo(User, { foreignKey: 'user_id' })
 
 
 module.exports = {
   sequelize,
   Forum,
-  Recipe
+  Recipe,
+  Workout,
+  User
 };
