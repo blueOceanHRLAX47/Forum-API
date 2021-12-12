@@ -154,9 +154,30 @@ const User = sequelize.define('users', {
   updatedAt: false
 })
 
+const Comment = dequelize.define('comments', {
+  user_id: {
+    type: DataTypes.INTEGER,
+  },
+  post_id: {
+    type: DataTypes.INTEGER,
+  },
+  content: {
+    type: DataTypes.STRING,
+  },
+  time_posted: {
+    type: DataTypes.DATE,
+  },
+}, {
+  timestamp: false,
+  createdAt: false,
+  updatedAt: false
+})
+
 Forum.belongsTo(Recipe, { foreignKey: 'recipe_id' })
 Forum.belongsTo(Workout, { foreignKey: 'workout_id' })
 Forum.belongsTo(User, { foreignKey: 'user_id' })
+Comment.belongsTo(Forum, { foreignKey: 'post_id' })
+Comment.belongsTo(User, { foreignKey: 'user_id' })
 
 
 module.exports = {
@@ -164,5 +185,6 @@ module.exports = {
   Forum,
   Recipe,
   Workout,
-  User
+  User,
+  Comment
 };

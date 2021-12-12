@@ -1,12 +1,21 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const { sequelize, Forum, Recipe, Workout, User } = require('../database');
+const { sequelize, Forum, Recipe, Workout, User, Comment } = require('../database');
 const port = 3001;
 
 
 app.use(cors());
 app.use(express.json());
+
+app.get('/:id', (req, res) => { // NOT TESTED, POTENTIALLY NEEDS REFACTORING
+  Comment.findAll({
+    include: User,
+    where: {
+      post_id: req.params.id
+    }
+  })
+})
 
 app.get('/', (req, res) => {
   Forum.findAll({
@@ -16,6 +25,15 @@ app.get('/', (req, res) => {
       res.status(200).send(posts);
     })
     .catch(err => { console.log(err)})
+})
+
+app.post('/comment/:id', (req, res) => { // NOT TESTED, POTENTIALLY NEEDS REFACTORING
+  Comment.create({
+    "user_id": req.body.user_id,
+    "post_id": req.params.id,
+    "content": req.body.content
+    "time_posted": req.body.time_posted
+  })
 })
 
 app.post('/', (req, res) => {
