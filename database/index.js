@@ -154,7 +154,7 @@ const User = sequelize.define('users', {
   updatedAt: false
 })
 
-const Comment = dequelize.define('comments', {
+const Comment = sequelize.define('comments', {
   user_id: {
     type: DataTypes.INTEGER,
   },
@@ -176,8 +176,8 @@ const Comment = dequelize.define('comments', {
 Forum.belongsTo(Recipe, { foreignKey: 'recipe_id' })
 Forum.belongsTo(Workout, { foreignKey: 'workout_id' })
 Forum.belongsTo(User, { foreignKey: 'user_id' })
-Comment.belongsTo(Forum, { foreignKey: 'post_id' })
 Comment.belongsTo(User, { foreignKey: 'user_id' })
+Forum.hasMany(Comment, { foreignKey: 'post_id'} )
 
 
 module.exports = {
