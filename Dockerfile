@@ -16,7 +16,7 @@ RUN npm install
 COPY . .
 
 EXPOSE 8080
-CMD [ "node", "server.js" ]
+CMD [ "node", "server/index.js" ]
 
 # create the docker image by running the command below in terminal. Make sure to have .dockerignore w/ node_modules and npm-debug.log
 # docker build . -t brettroberts/blue_ocean_forum_api
