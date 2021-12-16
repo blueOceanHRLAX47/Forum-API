@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const { sequelize, Forum, Recipe, Workout, User, Comment } = require('../database');
+const axios = require('axios');
 const port = 3001;
 
 app.use(cors());
@@ -46,8 +47,18 @@ app.post('/comment/:id', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  console.log('request body:', req.body)
-  Forum.create(req.body)
+  // axios.get('http://cultiveight.net')
+  // .then(result => console.log('result of GET request:', result.body))
+  // .catch(err => console.log(err));
+
+  console.log('request body:', req.body);
+
+  Forum.create({
+    user_id: req.body.user.id,
+    time_posted: Date.now(),
+    title: req.body.title,
+    content: req.body.content
+  })
     .then(post => {
       res.status(201).json(post);
     })
