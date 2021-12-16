@@ -58,6 +58,7 @@ app.post('/', (req, res) => {
 
   Forum.create({
     "user_id": req.body.user.id,
+    "likes": 0,
     "time_posted": Date.now(),
     "title": req.body.title,
     "content": req.body.content
