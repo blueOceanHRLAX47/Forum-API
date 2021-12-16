@@ -26,8 +26,11 @@ app.get('/comment/:id', (req, res) => {
 
 app.get('/', (req, res) => {
   Forum.findAll({
-    include: [User, Comment], // include Recipe and Workout as well if desired
-    order: sequelize.col('time_posted DESCç')
+    include: [User, { 
+      model: Comment,
+      include: User
+    }],
+    order: sequelize.col('time_posted DESC')
   })
     .then(posts => {
       res.status(200).send(posts);
