@@ -54,15 +54,16 @@ app.post('/', (req, res) => {
   // .catch(err => console.log(err));
 
   console.log('request body:', req.body);
+  var requestObject = req;
 
   Forum.create({
-    user_id: 5,
-    time_posted: Date.now(),
-    title: req.body.title,
-    content: req.body.content
+    "user_id": req.body.user.id,
+    "time_posted": Date.now(),
+    "title": req.body.title,
+    "content": req.body.content
   })
     .then(post => {
-      res.status(201).json(req);
+      res.status(201).json(post);
     })
     .catch(err => { console.log(err)})
 })
