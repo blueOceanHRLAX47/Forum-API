@@ -6,7 +6,7 @@ const axios = require('axios');
 const port = 3001;
 
 app.use(cors(
-  origin: ['http://cultiveight.net', 'http://localhost:3000']
+  { origin: ['http://cultiveight.net', 'http://localhost:3000'] }
 ));
 app.use(express.json());
 
@@ -56,7 +56,7 @@ app.post('/', (req, res) => {
   console.log('request body:', req.body);
 
   Forum.create({
-    user_id: req.body.user.id,
+    user_id: 5,
     time_posted: Date.now(),
     title: req.body.title,
     content: req.body.content
