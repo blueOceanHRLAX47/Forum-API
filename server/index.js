@@ -5,7 +5,9 @@ const { sequelize, Forum, Recipe, Workout, User, Comment } = require('../databas
 const axios = require('axios');
 const port = 3001;
 
-app.use(cors());
+app.use(cors(
+  origin: ['http://cultiveight.net', 'http://localhost:3000']
+));
 app.use(express.json());
 
 app.get('/comment/:id', (req, res) => {
