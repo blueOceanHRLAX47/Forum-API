@@ -62,7 +62,7 @@ app.post('/', (req, res) => {
     content: req.body.content
   })
     .then(post => {
-      res.status(201).json(post);
+      res.status(201).json(req);
     })
     .catch(err => { console.log(err)})
 })
