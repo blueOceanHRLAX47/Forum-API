@@ -26,11 +26,13 @@ app.get('/comment/:id', (req, res) => {
 
 app.get('/', (req, res) => {
   Forum.findAll({
-    include: [User, { 
+    include: [User, {
       model: Comment,
       include: User
     }],
-    order: sequelize.col('time_posted DESC')
+    order: [
+      ['id', 'DESC'],
+  ]
   })
     .then(posts => {
       res.status(200).send(posts);
