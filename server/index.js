@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 
 app.post('/comment/:id', (req, res) => {
   Comment.create({
-    "user_id": req.body.user_id,
+    "user_id": req.body.user.id,
     "post_id": req.params.id,
     "content": req.body.content,
     "time_posted": req.body.time_posted
